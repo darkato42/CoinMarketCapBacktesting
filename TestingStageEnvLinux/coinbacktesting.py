@@ -16,8 +16,10 @@ def btexample():
     test = bt.Backtest(s, data)
     res = bt.run(test)
 
+    res.display()
+    res.to_csv(sep=',', path='./bar.csv')
     # first let's see an equity curve
-    plot = res.plot()
+    plot = res.plot(figsize=(15,5))
     fig = plot.get_figure()
     fig.savefig("foo.png")
 
