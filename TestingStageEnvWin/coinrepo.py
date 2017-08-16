@@ -12,7 +12,7 @@ def get_db_cursor():
     return cursor
 
 def get_allcoinsymbols():
-    sql = """\
+    sql = """
         SELECT  Id,
                 symbol,
                 ticker,
@@ -21,6 +21,33 @@ def get_allcoinsymbols():
     """
     cursor = get_db_cursor()
     cursor.execute(sql)
+    rows = cursor.fetchall()
+    columnnames = [column[0] for column in cursor.description]
+    df = pd.DataFrame.from_records(rows, columns=columnnames)
+    return df
+
+def get_coinhistory(symbol_list):
+    paramholder = ",".join("?" * len(symbol_list))
+    sql = """
+        SELECT	Id,
+                Date,
+                Position,
+                Name,
+                Symbol,
+                Category,
+                MarketCap,
+                Price,
+                AvailableSupply,
+                Volume24,
+                Change1h,
+                Change24h,
+                Change7d
+        FROM	dbo.HistoryDaily
+        WHERE	Symbol IN (%s)
+    """ % (paramholder)
+
+    cursor = get_db_cursor()
+    cursor.execute(sql, symbol_list)
     rows = cursor.fetchall()
     columnnames = [column[0] for column in cursor.description]
     df = pd.DataFrame.from_records(rows, columns=columnnames)
