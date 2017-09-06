@@ -6,3 +6,4 @@ It's far easier to set up the dev environment in Linux than in Windows!
 pip install pandas
 pip install pyodbc
 ```
+3.  [Using conda to install zipline](http://www.zipline.io/install.html)
