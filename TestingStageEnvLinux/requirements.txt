@@ -9,7 +9,7 @@ functools32==3.2.3.post2
 future==0.16.0
 idna==2.6
 matplotlib==2.0.2
-numpy==1.13.1
+numpy==1.21.0
 pandas==0.20.3
 pandas-datareader==0.5.0
 pyodbc==4.0.17
